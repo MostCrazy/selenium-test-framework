@@ -1,0 +1,516 @@
+# 本地开发环境配置
+# 此配置文件用于本地开发和调试
+
+# 环境标识
+environment: local
+
+# 浏览器配置
+browser:
+  # 浏览器类型: chrome, firefox, safari, edge
+  browser_type: chrome
+  
+  # 是否无头模式运行
+  headless: false
+  
+  # 浏览器窗口大小 [宽度, 高度]
+  window_size: [1920, 1080]
+  
+  # 隐式等待时间（秒）
+  implicit_wait: 10
+  
+  # 页面加载超时时间（秒）
+  page_load_timeout: 30
+  
+  # 脚本执行超时时间（秒）
+  script_timeout: 30
+  
+  # 浏览器选项
+  options:
+    # Chrome特定选项
+    chrome:
+      - "--no-sandbox"
+      - "--disable-dev-shm-usage"
+      - "--disable-gpu"
+      - "--disable-extensions"
+      - "--disable-web-security"
+      - "--allow-running-insecure-content"
+    
+    # Firefox特定选项
+    firefox:
+      - "--width=1920"
+      - "--height=1080"
+    
+    # Edge特定选项
+    edge:
+      - "--no-sandbox"
+      - "--disable-dev-shm-usage"
+  
+  # 下载目录
+  download_directory: "downloads"
+  
+  # 是否启用日志记录
+  enable_logging: true
+  
+  # 浏览器日志级别
+  log_level: "INFO"
+
+# API测试配置
+api:
+  # 基础URL
+  base_url: "http://localhost:8080"
+  
+  # 请求超时时间（秒）
+  timeout: 30
+  
+  # 重试次数
+  retries: 3
+  
+  # 重试间隔（秒）
+  retry_delay: 1.0
+  
+  # 默认请求头
+  default_headers:
+    "Content-Type": "application/json"
+    "Accept": "application/json"
+    "User-Agent": "AutoTest-Client/1.0"
+  
+  # 认证配置
+  auth:
+    # 认证类型: none, basic, bearer, api_key
+    type: "none"
+    
+    # 基本认证
+    basic:
+      username: "test_user"
+      password: "test_pass"
+    
+    # Bearer Token
+    bearer:
+      token: "your_bearer_token_here"
+    
+    # API Key
+    api_key:
+      key: "your_api_key_here"
+      header: "X-API-Key"
+  
+  # SSL验证
+  verify_ssl: true
+  
+  # 代理设置
+  proxy:
+    enabled: false
+    http: "http://proxy.example.com:8080"
+    https: "https://proxy.example.com:8080"
+
+# 数据库配置
+database:
+  # 数据库类型: sqlite, mysql, postgresql, oracle
+  database_type: "sqlite"
+  
+  # SQLite配置
+  sqlite:
+    database_path: "test_data/test.db"
+  
+  # MySQL配置
+  mysql:
+    host: "localhost"
+    port: 3306
+    username: "test_user"
+    password: "test_pass"
+    database: "test_db"
+    charset: "utf8mb4"
+  
+  # PostgreSQL配置
+  postgresql:
+    host: "localhost"
+    port: 5432
+    username: "test_user"
+    password: "test_pass"
+    database: "test_db"
+  
+  # 连接池配置
+  pool:
+    # 连接池大小
+    pool_size: 5
+    
+    # 最大溢出连接数
+    max_overflow: 10
+    
+    # 连接超时时间（秒）
+    pool_timeout: 30
+    
+    # 连接回收时间（秒）
+    pool_recycle: 3600
+  
+  # 事务配置
+  transaction:
+    # 自动提交
+    autocommit: false
+    
+    # 事务隔离级别
+    isolation_level: "READ_COMMITTED"
+
+# 测试执行配置
+test:
+  # 并行执行模式: sequential, parallel_thread, parallel_process
+  execution_mode: "sequential"
+  
+  # 并行工作线程/进程数
+  parallel_workers: 1
+  
+  # 是否重试失败的测试
+  retry_failed_tests: true
+  
+  # 最大重试次数
+  max_retries: 2
+  
+  # 重试间隔（秒）
+  retry_delay: 1.0
+  
+  # 测试超时时间（秒）
+  test_timeout: 300
+  
+  # 是否在失败时立即停止
+  fail_fast: false
+  
+  # 测试标签过滤
+  tags:
+    include: []
+    exclude: ["slow", "manual"]
+  
+  # 测试数据配置
+  test_data:
+    # 数据目录
+    data_directory: "test_data"
+    
+    # 默认数据格式: json, yaml, csv, excel
+    default_format: "json"
+    
+    # 数据生成配置
+    generation:
+      # 默认生成数量
+      default_count: 10
+      
+      # 随机种子（用于可重复的随机数据）
+      random_seed: 42
+      
+      # 本地化设置
+      locale: "zh_CN"
+
+# 报告配置
+report:
+  # 报告目录
+  output_directory: "reports"
+  
+  # 报告格式: html, json, xml, allure
+  formats: ["html", "json"]
+  
+  # HTML报告配置
+  html:
+    # 报告标题
+    title: "自动化测试报告 - 本地环境"
+    
+    # 是否包含截图
+    include_screenshots: true
+    
+    # 是否包含日志
+    include_logs: true
+    
+    # 主题: light, dark
+    theme: "light"
+  
+  # JSON报告配置
+  json:
+    # 是否美化输出
+    pretty_print: true
+    
+    # 是否包含详细信息
+    include_details: true
+  
+  # Allure报告配置
+  allure:
+    # 结果目录
+    results_directory: "allure-results"
+    
+    # 报告目录
+    report_directory: "allure-report"
+  
+  # 邮件报告配置
+  email:
+    # 是否启用邮件报告
+    enabled: false
+    
+    # SMTP配置
+    smtp:
+      host: "smtp.example.com"
+      port: 587
+      username: "test@example.com"
+      password: "email_password"
+      use_tls: true
+    
+    # 收件人列表
+    recipients:
+      - "team@example.com"
+      - "manager@example.com"
+    
+    # 邮件主题模板
+    subject_template: "测试报告 - {environment} - {timestamp}"
+    
+    # 发送条件: always, on_failure, on_success
+    send_condition: "always"
+
+# 日志配置
+logging:
+  # 日志级别: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  level: "INFO"
+  
+  # 日志目录
+  log_directory: "logs"
+  
+  # 日志文件名模板
+  filename_template: "test_{timestamp}.log"
+  
+  # 日志格式
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+  # 日期格式
+  date_format: "%Y-%m-%d %H:%M:%S"
+  
+  # 文件处理器配置
+  file_handler:
+    # 是否启用文件日志
+    enabled: true
+    
+    # 最大文件大小（MB）
+    max_file_size: 10
+    
+    # 备份文件数量
+    backup_count: 5
+    
+    # 文件编码
+    encoding: "utf-8"
+  
+  # 控制台处理器配置
+  console_handler:
+    # 是否启用控制台日志
+    enabled: true
+    
+    # 控制台日志级别
+    level: "INFO"
+  
+  # 第三方库日志级别
+  third_party:
+    selenium: "WARNING"
+    urllib3: "WARNING"
+    requests: "WARNING"
+
+# 截图配置
+screenshot:
+  # 截图目录
+  directory: "screenshots"
+  
+  # 截图格式: png, jpg
+  format: "png"
+  
+  # 截图质量（1-100，仅对jpg有效）
+  quality: 90
+  
+  # 是否在失败时自动截图
+  on_failure: true
+  
+  # 是否在每个步骤后截图
+  on_step: false
+  
+  # 截图文件名模板
+  filename_template: "{test_name}_{timestamp}"
+  
+  # 是否包含时间戳
+  include_timestamp: true
+
+# 录屏配置
+recording:
+  # 是否启用录屏
+  enabled: false
+  
+  # 录屏目录
+  directory: "recordings"
+  
+  # 录屏格式: mp4, avi
+  format: "mp4"
+  
+  # 帧率
+  fps: 10
+  
+  # 录屏质量: low, medium, high
+  quality: "medium"
+  
+  # 是否只在失败时录屏
+  on_failure_only: true
+
+# 移动端测试配置（Appium）
+mobile:
+  # 是否启用移动端测试
+  enabled: false
+  
+  # Appium服务器配置
+  appium:
+    host: "localhost"
+    port: 4723
+    
+  # 设备配置
+  device:
+    # 平台: Android, iOS
+    platform: "Android"
+    
+    # 设备名称
+    device_name: "Android Emulator"
+    
+    # 平台版本
+    platform_version: "11.0"
+    
+    # 应用包名（Android）
+    app_package: "com.example.app"
+    
+    # 应用活动名（Android）
+    app_activity: ".MainActivity"
+    
+    # 应用路径
+    app_path: "apps/example.apk"
+    
+    # 是否自动授权
+    auto_grant_permissions: true
+    
+    # 是否重置应用
+    no_reset: false
+
+# 性能测试配置
+performance:
+  # 是否启用性能监控
+  enabled: false
+  
+  # 性能指标收集
+  metrics:
+    # 响应时间阈值（毫秒）
+    response_time_threshold: 3000
+    
+    # 内存使用阈值（MB）
+    memory_threshold: 512
+    
+    # CPU使用阈值（%）
+    cpu_threshold: 80
+  
+  # 性能报告
+  reporting:
+    # 是否生成性能报告
+    generate_report: true
+    
+    # 报告格式
+    format: "html"
+    
+    # 报告目录
+    directory: "performance_reports"
+
+# 安全测试配置
+security:
+  # 是否启用安全测试
+  enabled: false
+  
+  # SSL/TLS配置
+  ssl:
+    # 是否验证证书
+    verify_certificates: true
+    
+    # 最低TLS版本
+    min_tls_version: "1.2"
+  
+  # 敏感数据配置
+  sensitive_data:
+    # 敏感数据掩码
+    mask_patterns:
+      - "password"
+      - "token"
+      - "secret"
+      - "key"
+    
+    # 是否在日志中掩码敏感数据
+    mask_in_logs: true
+
+# 云服务配置
+cloud:
+  # 是否使用云服务
+  enabled: false
+  
+  # 云服务提供商: browserstack, saucelabs, lambdatest
+  provider: "browserstack"
+  
+  # BrowserStack配置
+  browserstack:
+    username: "your_username"
+    access_key: "your_access_key"
+    
+    # 测试配置
+    capabilities:
+      browser: "Chrome"
+      browser_version: "latest"
+      os: "Windows"
+      os_version: "10"
+      resolution: "1920x1080"
+  
+  # Sauce Labs配置
+  saucelabs:
+    username: "your_username"
+    access_key: "your_access_key"
+    
+    # 数据中心
+    data_center: "us-west-1"
+
+# 通知配置
+notifications:
+  # 是否启用通知
+  enabled: false
+  
+  # 通知渠道
+  channels:
+    # 钉钉通知
+    dingtalk:
+      enabled: false
+      webhook_url: "https://oapi.dingtalk.com/robot/send?access_token=your_token"
+      
+    # 企业微信通知
+    wechat_work:
+      enabled: false
+      webhook_url: "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=your_key"
+      
+    # Slack通知
+    slack:
+      enabled: false
+      webhook_url: "https://hooks.slack.com/services/your/slack/webhook"
+      channel: "#testing"
+  
+  # 通知条件
+  conditions:
+    # 测试完成时通知
+    on_completion: true
+    
+    # 测试失败时通知
+    on_failure: true
+    
+    # 测试成功时通知
+    on_success: false
+
+# 调试配置
+debug:
+  # 是否启用调试模式
+  enabled: true
+  
+  # 调试时是否暂停
+  pause_on_failure: false
+  
+  # 是否保存调试信息
+  save_debug_info: true
+  
+  # 调试信息目录
+  debug_directory: "debug"
+  
+  # 是否启用详细输出
+  verbose: true
